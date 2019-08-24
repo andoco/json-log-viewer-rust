@@ -1,0 +1,7 @@
+[package]
+name = "rust-json-logs-viewer"
+version = "0.1.0"
+authors = ["Andrew O'Connor <andrew.oconnor@gmail.com>"]
+edition = "2018"
+
+[dependencies]
