@@ -2,6 +2,7 @@ use std::io::{self, BufRead};
 use serde_json::{Value,json};
 
 #[derive(Debug, Clone)]
+#[derive(PartialEq)]
 enum LogLineError {
     Field(Value,String)
 }
@@ -51,5 +52,32 @@ mod tests {
     fn test_format_log_line() {
         let v = json!({"timestamp": "2019-08-25T09:00:00", "level": "info", "message": "a test message"});
         assert_eq!("2019-08-25T09:00:00 [info] a test message", format_log_line(v).unwrap())
+    }
+
+    #[test]
+    fn test_format_log_line_with_missing_timestamp_returns_error() {
+        let v = json!({"level": "info", "message": "a test message"});
+        match format_log_line(v) {
+            Ok(_) => panic!("expected an error"),
+            Err(LogLineError::Field(_, name)) => assert_eq!(String::from("timestamp"), name),
+        }
+    }
+
+    #[test]
+    fn test_format_log_line_with_missing_level_returns_error() {
+        let v = json!({"timestamp": "2019-08-25T09:00:00", "message": "a test message"});
+        match format_log_line(v) {
+            Ok(_) => panic!("expected an error"),
+            Err(LogLineError::Field(_, name)) => assert_eq!(String::from("level"), name),
+        }
+    }
+
+    #[test]
+    fn test_format_log_line_with_missing_message_returns_error() {
+        let v = json!({"timestamp": "2019-08-25T09:00:00", "level": "info"});
+        match format_log_line(v) {
+            Ok(_) => panic!("expected an error"),
+            Err(LogLineError::Field(_, name)) => assert_eq!(String::from("message"), name),
+        }
     }
 }
