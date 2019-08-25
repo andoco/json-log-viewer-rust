@@ -1,5 +1,5 @@
 use std::io::{self, BufRead};
-use serde_json::{Value,json};
+use serde_json::{Value};
 
 #[derive(Debug, Clone)]
 #[derive(PartialEq)]
@@ -47,6 +47,7 @@ fn format_log_line(v: Value) -> Result<String,LogLineError> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serde_json::{json};
 
     #[test]
     fn test_format_log_line() {
