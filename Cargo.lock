@@ -6,7 +6,7 @@ version = "0.4.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "rust-json-logs-viewer"
+name = "rust-json-log-viewer"
 version = "0.1.0"
 dependencies = [
  "serde_json 1.0.40 (registry+https://github.com/rust-lang/crates.io-index)",
