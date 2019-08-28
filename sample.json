@@ -1,0 +1,3 @@
+{"timestamp":"2019-08-24T12:00:00","level":"info","message":"testing an info message"}
+{"timestamp2":"2019-08-24T12:00:00","level":"error","message":"testing an error message"}
+{"timestamp":"2019-08-24T12:00:01","level":"info","message":"testing an info message"}
